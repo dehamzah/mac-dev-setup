@@ -14,7 +14,8 @@ brew "lazydocker"
 
 # Programming Languages
 brew "nvm"                   
-brew "uv"                 
+brew "uv"
+brew "oven-sh/bun/bun"                 
 
 # Development
 cask "visual-studio-code"    

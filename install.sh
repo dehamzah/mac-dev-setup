@@ -39,6 +39,9 @@ fi
 echo "Updating Homebrew..."
 brew update
 
+# Additional Brew Registries
+brew tap oven-sh/bun
+
 # Install all dependencies from Brewfile
 echo "Installing dependencies from Brewfile..."
 brew bundle

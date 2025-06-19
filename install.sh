@@ -43,6 +43,29 @@ brew update
 echo "Installing dependencies from Brewfile..."
 brew bundle
 
+# Setup SSH key for GitHub
+echo "Checking SSH key setup..."
+SSH_KEY_PATH="$HOME/.ssh/id_ed25519"
+
+if [ ! -f "$SSH_KEY_PATH" ]; then
+    echo "No SSH key found. Setting up new SSH key..."
+    read -p "Enter your email for SSH key: " ssh_email
+    ssh-keygen -t ed25519 -C "$ssh_email" -f "$SSH_KEY_PATH" -N ""
+    
+    # Start ssh-agent and add key
+    eval "$(ssh-agent -s)"
+    ssh-add "$SSH_KEY_PATH"
+    
+    # Display the public key and instructions
+    echo "\nYour SSH public key is:"
+    cat "${SSH_KEY_PATH}.pub"
+    echo "\nPlease add this SSH key to your GitHub account:"
+    echo "1. Go to GitHub Settings -> SSH and GPG keys -> New SSH key"
+    echo "2. Copy the above public key and paste it there"
+    echo "3. Click 'Add SSH key'\n"
+else
+    echo "SSH key already exists at $SSH_KEY_PATH"
+fi
 
 # Setup git configuration
 echo "Setting up git configuration..."

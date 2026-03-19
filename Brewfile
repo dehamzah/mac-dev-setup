@@ -25,19 +25,14 @@ brew 'k9s'
 brew 'dnsmasq'
 
 # Programming Languages, Runtimes, and Package Managers
-brew 'nvm'
-brew 'uv'
-brew 'oven-sh/bun/bun'
-brew 'deno'
-brew 'pnpm'
+brew 'mise'
 
 # Development
 cask 'visual-studio-code'
-cask 'cursor'
-cask 'iterm2'
-cask 'warp'
-cask 'insomnia'
-cask 'figma'
+cask 'ghostty'
+cask 'antigravity'
+brew 'starship'
+cask 'bruno'
 
 # Cloud
 cask 'gcloud-cli'
@@ -45,16 +40,12 @@ cask 'gcloud-cli'
 # Browsers
 cask 'google-chrome'
 cask 'firefox'
-cask 'arc'
+cask 'thebrowsercompany-dia'
 
 # Communication
-cask 'discord'
-cask 'telegram'
-cask 'slack'
 cask 'zoom'
 
 # Etc
 cask 'stats'
 cask 'vlc'
 cask 'keka' # winrar alternative
-cask 'inkscape' # vector design app

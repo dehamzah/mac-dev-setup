@@ -2,25 +2,7 @@
 
 echo "Starting development environment setup..."
 
-# Install Oh My Zsh
-if [ ! -d "$HOME/.oh-my-zsh" ]; then
-    echo "Installing Oh My Zsh..."
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
-else
-    echo "Oh My Zsh is already installed..."
-fi
-
-# Define the desired ZSH theme
-DESIRED_ZSH_THEME="avit"
-
-# Check if ZSH theme is already set to the desired theme
-if ! grep -q "ZSH_THEME=\"$DESIRED_ZSH_THEME\"" ~/.zshrc; then
-    echo "Setting ZSH theme to '$DESIRED_ZSH_THEME'..."
-    sed -i '' "s/^ZSH_THEME=\".*\"/ZSH_THEME=\"$DESIRED_ZSH_THEME\"/" ~/.zshrc
-else
-    echo "ZSH theme is already set to '$DESIRED_ZSH_THEME'..."
-fi
-    
+ 
 # Check if Homebrew is installed
 if test ! $(which brew); then
     echo "Installing Homebrew..."
@@ -38,9 +20,6 @@ fi
 # Update Homebrew recipes
 echo "Updating Homebrew..."
 brew update
-
-# Additional Brew Registries
-brew tap oven-sh/bun
 
 # Install all dependencies from Brewfile
 echo "Installing dependencies from Brewfile..."

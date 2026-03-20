@@ -21,9 +21,6 @@ brew 'helm'
 brew 'krew'
 brew 'k9s'
 
-# DNS
-brew 'dnsmasq'
-
 # Programming Languages, Runtimes, and Package Managers
 brew 'mise'
 

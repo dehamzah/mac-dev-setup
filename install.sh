@@ -25,6 +25,36 @@ brew update
 echo "Installing dependencies from Brewfile..."
 brew bundle
 
+
+
+# Copy mise config
+echo "Configuring mise..."
+MISE_CONFIG_HOME="$HOME/.config/mise/config.toml"
+MISE_CONFIG_DIR="$HOME/.config/mise"
+# The script is expected to be run from the repository root
+REPO_MISE_CONFIG=".config/mise/config.toml"
+
+if [ ! -d "$MISE_CONFIG_DIR" ]; then
+    mkdir -p "$MISE_CONFIG_DIR"
+fi
+
+if [ ! -f "$MISE_CONFIG_HOME" ]; then
+    echo "Copying mise config to $MISE_CONFIG_HOME..."
+    cp "$REPO_MISE_CONFIG" "$MISE_CONFIG_HOME"
+else
+    read -p "Mise config already exists in $MISE_CONFIG_HOME. Overwrite it? (y/n): " overwrite
+    if [[ $overwrite == "y" || $overwrite == "Y" ]]; then
+        echo "Overwriting mise config..."
+        cp "$REPO_MISE_CONFIG" "$MISE_CONFIG_HOME"
+    else
+        echo "Skipping mise config copy..."
+    fi
+fi
+
+# Setup mise
+echo "Setting up mise..."
+mise install
+
 # Setup SSH key for GitHub
 echo "Checking SSH key setup..."
 SSH_KEY_PATH="$HOME/.ssh/id_ed25519"

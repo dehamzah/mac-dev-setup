@@ -1,3 +1,4 @@
+# BEGIN MAC-DEV-SETUP
 # Homebrew environment setup
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
@@ -9,3 +10,4 @@ eval "$(starship init zsh)"
 
 # Krew plugin manager for kubectl setup
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+# END MAC-DEV-SETUP

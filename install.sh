@@ -7,12 +7,7 @@ echo "Starting development environment setup..."
 if test ! $(which brew); then
     echo "Installing Homebrew..."
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    
-    # Add Homebrew to PATH for Apple Silicon Macs
-    if [[ $(uname -m) == 'arm64' ]]; then
-        echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> $HOME/.zprofile
-        eval "$(/opt/homebrew/bin/brew shellenv)"
-    fi
+    eval "$(/opt/homebrew/bin/brew shellenv)"
 else
     echo "Homebrew is already installed..."
 fi
@@ -59,6 +54,25 @@ fi
 # Setup mise
 echo "Setting up mise..."
 mise install
+
+# Configure .zshrc
+echo "Configuring .zshrc..."
+ZSHRC_HOME="$HOME/.zshrc"
+REPO_ZSHRC=".zshrc"
+MARKER="# BEGIN MAC-DEV-SETUP"
+
+if [ -f "$ZSHRC_HOME" ]; then
+    if grep -q "$MARKER" "$ZSHRC_HOME"; then
+        echo ".zshrc already contains mac-dev-setup configuration. Skipping..."
+    else
+        echo "Appending mac-dev-setup configuration to $ZSHRC_HOME..."
+        printf "\n" >> "$ZSHRC_HOME"
+        cat "$REPO_ZSHRC" >> "$ZSHRC_HOME"
+    fi
+else
+    echo "Creating $ZSHRC_HOME with mac-dev-setup configuration..."
+    cp "$REPO_ZSHRC" "$ZSHRC_HOME"
+fi
 
 # Setup SSH key for GitHub
 echo "Checking SSH key setup..."

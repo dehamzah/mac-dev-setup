@@ -18,8 +18,13 @@ else
 fi
 
 # Update Homebrew recipes
-echo "Updating Homebrew..."
-brew update
+read -p "Update Homebrew recipes? (y/n): " update_brew
+if [[ $update_brew == "y" || $update_brew == "Y" ]]; then
+    echo "Updating Homebrew..."
+    brew update
+else
+    echo "Skipping Homebrew update..."
+fi
 
 # Install all dependencies from Brewfile
 echo "Installing dependencies from Brewfile..."
